@@ -1,2 +1,2 @@
 # HelloWorldAPI
-Node.js RESTful API that returns a simple JSON
+Vanilla node.js RESTful API that returns a simple JSON
