@@ -69,16 +69,18 @@ const ApiHandler = class ApiHandler {
             chosenHandler((statusCode) => {
                 statusCode = typeof(statusCode) === 'number' ? statusCode : 200;
                 let data = { 'endpoint' : path }
+                let isValidResource = true;
                 
                 res.setHeader('Content-Type', 'application/json')
                 if(statusCode === 200){
                     data.message = 'Hello world, how are you?';
                 } else {
-                    data = { 'error' : `Resource '${path}' not found, goodbye.` }
+                    data = { 'error' : `Resource '${path}' not found, goodbye.` };
+                    isValidResource = false;
                     res.statusCode = statusCode;
                 }
 
-                if(buffer.length > 0  && method && (method === 'POST' || method === 'PUT')) {
+                if(isValidResource && buffer.length > 0  && method && (method === 'POST' || method === 'PUT')) {
                     let payload;
                     try {
                         data.payload = JSON.parse(buffer);
